@@ -1,26 +1,191 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dexoree Hub - Emden</title>
+  <title>DexorEE Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121212">
   <style>
-    body { font-family: 'Segoe UI', sans-serif; background: #191b22; color: #fff; margin:0; }
-    .center { max-width: 500px; margin: 80px auto; text-align:center; padding:40px 20px; background: #22242d; border-radius: 16px; box-shadow: 0 4px 28px #0008; }
-    h1 { color: #49c4ff; margin-bottom:12px;}
-    a { color: #49c4ff; text-decoration:none; }
-    a.button { display:inline-block; margin-top: 20px; background: #49c4ff; color:#191b22; padding:10px 28px; border-radius:8px; font-weight: bold;}
-    .credit { margin-top:48px; color: #aaa; font-size:13px;}
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #111214;
+      color: #f3f3f3;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .main {
+      flex: 1;
+      max-width: 480px;
+      margin: 40px auto 0 auto;
+      background: #181a1e;
+      border-radius: 22px;
+      box-shadow: 0 8px 40px #000b;
+      padding: 38px 26px 28px 26px;
+      text-align: center;
+      animation: showUp 0.8s cubic-bezier(.7,.3,0,1.1);
+    }
+    @keyframes showUp {
+      from { transform: translateY(40px) scale(.97); opacity:0;}
+      to   { transform: none; opacity:1;}
+    }
+    h1 {
+      font-size: 2.4em;
+      margin-bottom: 12px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #00ff7b;
+      text-shadow: 0 2px 20px #05ff1a50;
+    }
+    .loader {
+      background: #17191d;
+      border: 1px solid #24272c;
+      border-radius: 13px;
+      font-family: 'Fira Mono', 'Consolas', 'Menlo', monospace;
+      padding: 18px 12px;
+      margin: 32px 0 12px 0;
+      font-size: 1.02em;
+      color: #47ff47;
+      word-break: break-all;
+      position: relative;
+      transition: box-shadow 0.22s;
+      box-shadow: 0 0 12px #00ff7b30;
+      user-select: all;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 15px; right: 17px;
+      background: #212c20;
+      color: #1bff57;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 18px;
+      font-size: 0.98em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .16s, color .18s;
+    }
+    .copy-btn:hover {
+      background: #14ff6d;
+      color: #202122;
+    }
+    .copied {
+      background: #21fdad !important;
+      color: #0b1d0d !important;
+      animation: copyFlash 0.8s;
+    }
+    @keyframes copyFlash {
+      0%   { background: #18e079; color: #000;}
+      70%  { background: #21fdad; color: #0b1d0d;}
+      100% { background: #212c20; color: #1bff57;}
+    }
+    .faq {
+      margin: 48px 0 20px 0;
+      text-align: left;
+      border-radius: 12px;
+      background: #151616;
+      box-shadow: 0 0 24px #00991b18;
+      padding: 20px 20px 8px 20px;
+    }
+    .faq-item {
+      margin-bottom: 21px;
+    }
+    .faq-q {
+      color: #11ff7b;
+      font-weight: bold;
+      font-size: 1.08em;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .faq-a {
+      color: #e8e8e8;
+      margin-bottom: 2px;
+    }
+    @media (max-width: 550px) {
+      .main { margin: 22px 0 0 0; padding: 18px 4vw;}
+      h1 { font-size: 1.5em;}
+      .faq { padding: 12px 7px;}
+      .loader { font-size: 0.96em; padding: 13px 7px;}
+    }
+    footer {
+      width: 100%;
+      padding: 24px 0 8px 0;
+      color: #aaa;
+      background: none;
+      text-align: center;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      user-select: none;
+    }
+    a { color: #19ffd4; text-decoration: none;}
+    a:hover { text-decoration: underline;}
   </style>
 </head>
 <body>
-  <div class="center">
-    <h1>Dexoree Hub</h1>
-    <p>Dein Roblox-Emden-Hub – Powered by Steve & MrCatMemes 😎</p>
-    <a href="https://discord.gg/deinserver" class="button">Join Discord</a>
-    <div class="credit">
-      &copy; 2025 Dexoree – made by MrCatMemes
+  <div class="main">
+    <h1>DexorEE Loader</h1>
+    <div class="loader" id="loaderbox">
+      <button class="copy-btn" id="copybtn">Copy</button>
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/MrCatMemes/dexoree/refs/heads/main/dexoree.lua"))()
+    </div>
+    <div style="margin-bottom:20px;color:#4df7c6;font-size:1.13em;font-weight:500;">
+      100% Keyfree | Auto-Updating | Fast
+    </div>
+    <div class="faq">
+      <div class="faq-item">
+        <span class="faq-q">Is DexorEE keyfree?</span>
+        <span class="faq-a">Yes, DexorEE is completely keyfree.</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">Does DexorEE auto-update?</span>
+        <span class="faq-a">Yes. The loader always fetches the latest version.</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">How do I use the loader?</span>
+        <span class="faq-a">Copy the code above and paste it into your Roblox executor.</span>
+      </div>
+      <div class="faq-item">
+        <span class="faq-q">Who made DexorEE?</span>
+        <span class="faq-a">DexorEE is developed by <b>MrCatMemes</b>.</span>
+      </div>
     </div>
   </div>
+  <footer>
+    &copy; 2025 DexorHub – by MrCatMemes
+  </footer>
+  <script>
+    // Smooth scroll for anchor links (not needed, aber falls du mehr Seiten machst)
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    // Copy to clipboard
+    const btn = document.getElementById('copybtn');
+    const loaderbox = document.getElementById('loaderbox');
+    btn.addEventListener('click', function() {
+      let code = loaderbox.textContent.trim();
+      if (window.navigator && navigator.clipboard) {
+        navigator.clipboard.writeText(code);
+      } else {
+        const ta = document.createElement("textarea");
+        ta.value = code;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+      }
+      btn.classList.add("copied");
+      btn.textContent = "Copied!";
+      setTimeout(()=>{ btn.classList.remove("copied"); btn.textContent="Copy"; }, 1200);
+    });
+  </script>
 </body>
 </html>
